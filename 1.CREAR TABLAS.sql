@@ -1,11 +1,11 @@
 
 -- =============================================
--- 1. CREANDO LAS TABLAS
+-- P1. CREANDO LAS TABLAS
 -- =============================================
 
 
 -- =================================
--- customers
+-- 1. customers
 -- =================================
 CREATE TABLE customers (
 	customer_id  	int NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE customers (
 );
 
 -- =================================
--- suppliers
+-- 2. suppliers
 -- =================================
 CREATE TABLE suppliers (
 	supplier_id 	int 		NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE suppliers (
 );
 
 -- =================================
--- products
+-- 3. products
 -- =================================
 CREATE TABLE products (
 	product_id 		int 			NOT NULL,
@@ -48,7 +48,7 @@ CREATE TABLE products (
 
 
 -- =================================
--- orders
+-- 4. orders
 -- =================================
 CREATE TABLE orders (
 	order_id 		int 			NOT NULL,
@@ -62,7 +62,7 @@ CREATE TABLE orders (
 );
 
 -- =================================
--- order_items
+-- 5. order_items
 -- =================================
 CREATE TABLE order_items (
 	order_item_id 		int 			NOT NULL,
@@ -80,7 +80,7 @@ CREATE TABLE order_items (
 
 
 -- =================================
--- payment
+-- 6. payment
 -- =================================
 CREATE TABLE payment (
 	payment_id 			int 			NOT NULL,
@@ -96,7 +96,7 @@ CREATE TABLE payment (
 
 
 -- =================================
--- shipments
+-- 7. shipments
 -- =================================
 CREATE TABLE shipments (
 	shipment_id 		int 			NOT NULL,
@@ -111,7 +111,7 @@ CREATE TABLE shipments (
 );
 
 -- =================================
--- reviews
+-- 8. reviews
 -- =================================
 CREATE TABLE reviews (
 	review_id 		int 		NOT NULL,
