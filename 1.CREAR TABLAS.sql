@@ -7,7 +7,7 @@
 -- =================================
 -- customers
 -- =================================
-CREATE TABLE pf_org.customers (
+CREATE TABLE customers (
 	customer_id  	int NOT NULL,
 	first_name		varchar(50) NOT NULL,
 	last_name 		varchar(50) NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE products (
 	CONSTRAINT products_pk PRIMARY KEY (product_id),
 	CONSTRAINT products_suppliers_fk FOREIGN KEY (supplier_id) REFERENCES suppliers(supplier_id),
 	
-	CONSTRAINT products_price_positive_chk CHECK ((price > (0)::numeric(10,2) precision)),
+	CONSTRAINT products_price_positive_chk CHECK (price > 0)
 );
 
 
@@ -58,7 +58,7 @@ CREATE TABLE orders (
 	CONSTRAINT orders_pk PRIMARY KEY (order_id),
 	CONSTRAINT orders_customers_fk FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
 	
-	CONSTRAINT orders_total_price_chk CHECK ((total_price >= (0)::numeric(10,2) precision)),
+	CONSTRAINT orders_total_price_chk CHECK (total_price >= 0)
 );
 
 -- =================================
@@ -74,8 +74,8 @@ CREATE TABLE order_items (
 	CONSTRAINT order_items_orders_fk FOREIGN KEY (order_id) REFERENCES orders(order_id),
 	CONSTRAINT order_items_products_fk FOREIGN KEY (product_id) REFERENCES products(product_id),
 	
-	CONSTRAINT order_quantity_positive_chck CHECK ((quantity > 0)),
-	CONSTRAINT order_price_positive_chk CHECK ((price_at_purchase >= (0)::numeric(10,2) precision)),
+	CONSTRAINT order_quantity_positive_chck CHECK (quantity > 0),
+	CONSTRAINT order_price_positive_chk CHECK (price_at_purchase >= 0)
 );
 
 
@@ -91,7 +91,7 @@ CREATE TABLE payment (
 	CONSTRAINT payment_pk PRIMARY KEY (payment_id),
 	CONSTRAINT payment_orders_fk FOREIGN KEY (order_id) REFERENCES orders(order_id),
 	
-	CONSTRAINT payment_check CHECK ((amount > (0)::numeric(10,2) precision)),
+	CONSTRAINT payment_check CHECK (amount > 0)
 );
 
 
