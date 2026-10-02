@@ -66,10 +66,8 @@ COMMENT ON TABLE dim_tiempo IS 'Dimensión de tiempo detallada para evitar cálc
 -- ----------------------------------------------------------------------------
 CREATE TABLE dim_pagos (
     id_pago_dim 		SERIAL 			PRIMARY KEY,
-    payment_id 			INT 			NOT NULL,
     metodo_pago 		VARCHAR(50) 	NOT NULL,
-    estatus_transaccion VARCHAR(50) 	NOT NULL,
-    cantidad_pagada 	NUMERIC(12, 2) 	NOT NULL
+    estatus_transaccion VARCHAR(50) 	NOT NULL
 );
 
 COMMENT ON TABLE dim_pagos IS 'Dimensión que agrupa las transacciones por método y estado de confirmación del cobro.';

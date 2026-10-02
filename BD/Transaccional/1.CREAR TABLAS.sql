@@ -91,7 +91,8 @@ CREATE TABLE payment (
 	CONSTRAINT payment_pk PRIMARY KEY (payment_id),
 	CONSTRAINT payment_orders_fk FOREIGN KEY (order_id) REFERENCES orders(order_id),
 	
-	CONSTRAINT payment_check CHECK (amount > 0)
+	CONSTRAINT payment_check CHECK (amount > 0),
+	CONSTRAINT payment_orden_unique UNIQUE (order_id)
 );
 
 
