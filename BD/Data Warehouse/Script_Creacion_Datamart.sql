@@ -38,6 +38,8 @@ CREATE TABLE dim_productos (
     categoria 				VARCHAR(100) 	NOT NULL,
     precio_producto 		NUMERIC(12, 2) 	NOT NULL,
     nombre_proveedor 		VARCHAR(150) 	NOT NULL,
+    calificacion_promedio	INT 			NOT NULL,
+    cantidad_calificaciones	INT				NOT NULL
     CONSTRAINT unq_product_id UNIQUE (product_id)
 );
 
@@ -88,7 +90,6 @@ CREATE TABLE fact_ventas (
     precio_unitario 	NUMERIC(12, 2) 	NOT NULL,
     monto_total_item 	NUMERIC(12, 2) 	NOT NULL,
     estado_envio 		VARCHAR(50) 	NOT NULL,
-    calificacion 		INT 			NOT NULL,
     transportista 		VARCHAR(50) 	NOT NULL,
     -- Restricciones de integridad referencial (Foreign Keys)
     CONSTRAINT fk_fact_cliente FOREIGN KEY (id_cliente_dim) REFERENCES dim_clientes(id_cliente_dim),
