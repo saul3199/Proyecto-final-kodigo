@@ -37,9 +37,8 @@ CREATE TABLE dim_productos (
     nombre_producto 		VARCHAR(150) 	NOT NULL,
     categoria 				VARCHAR(100) 	NOT NULL,
     precio_producto 		NUMERIC(12, 2) 	NOT NULL,
+    supplier_id 			INT				NOT NULL,
     nombre_proveedor 		VARCHAR(150) 	NOT NULL,
-    calificacion_promedio	INT 			NOT NULL,
-    cantidad_calificaciones	INT				NOT NULL
     CONSTRAINT unq_product_id UNIQUE (product_id)
 );
 
@@ -52,11 +51,14 @@ COMMENT ON TABLE dim_productos IS 'Dimensión que consolida los datos del catál
 CREATE TABLE dim_tiempo (
     id_tiempo_dim 	INT 		PRIMARY KEY, -- Formato numérico AAAAMMDD como PK fija
     fecha_orden 	DATE 		NOT NULL,
+    dia				INT 		NOT NULL,
     anio 			INT 		NOT NULL,
     mes 			INT 		NOT NULL,
+    nombre_dia		VARCHAR(20) NOT NULL,
     nombre_mes 		VARCHAR(20) NOT NULL,
     trimestre 		INT 		NOT NULL,
     dia_semana 		INT 		NOT NULL,
+    anio_mes		VARCHAR(20) NOT NULL, 
     CONSTRAINT unq_fecha_orden UNIQUE (fecha_orden)
 );
 
@@ -89,8 +91,6 @@ CREATE TABLE fact_ventas (
     cantidad 			INT 			NOT NULL,
     precio_unitario 	NUMERIC(12, 2) 	NOT NULL,
     monto_total_item 	NUMERIC(12, 2) 	NOT NULL,
-    estado_envio 		VARCHAR(50) 	NOT NULL,
-    transportista 		VARCHAR(50) 	NOT NULL,
     -- Restricciones de integridad referencial (Foreign Keys)
     CONSTRAINT fk_fact_cliente FOREIGN KEY (id_cliente_dim) REFERENCES dim_clientes(id_cliente_dim),
     CONSTRAINT fk_fact_producto FOREIGN KEY (id_producto_dim) REFERENCES dim_productos(id_producto_dim),
