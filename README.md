@@ -16,18 +16,26 @@ El proyecto parte de un **modelo transaccional (OLTP)** y desarrolla un proceso 
 
 ## 📌 Descripción del proyecto
 
-El crecimiento de los datos generados por una tienda online hace necesario contar con estructuras que permitan transformar los datos operacionales en información útil para la toma de decisiones.
+Este proyecto tiene como objetivo diseñar e implementar una solución de
+**Business Intelligence** para una tienda online, transformando datos
+transaccionales en un **Data Warehouse / Data Mart dimensional** orientado
+al análisis estratégico de las ventas y al apoyo en la toma de decisiones.
 
-Este proyecto busca implementar una solución que permita:
+El proyecto parte de un conjunto de datos transaccionales que contiene
+información relacionada con órdenes, productos, clientes, pagos, envíos
+y calificaciones. A partir de estos datos se desarrolla un proceso
+integral que comprende **modelado dimensional, transformación y carga de
+datos, optimización de consultas y visualización de indicadores
+estratégicos**.
 
-- Integrar información proveniente del sistema transaccional.
-- Transformar y preparar los datos mediante procesos ETL.
-- Construir un Data Mart orientado al análisis.
-- Implementar un modelo dimensional tipo estrella.
-- Utilizar claves subrogadas para las dimensiones.
-- Definir claramente la granularidad de la tabla de hechos.
-- Generar indicadores clave de desempeño (KPIs).
-- Facilitar la exploración de la información mediante herramientas de Business Intelligence.
+La solución se estructura bajo un enfoque de **Modelo de Estrella
+(Star Schema)**, donde una tabla de hechos concentra las métricas de
+ventas y se relaciona directamente con dimensiones de análisis como
+productos, clientes, pagos y tiempo.
+
+El proyecto no se limita a la construcción del modelo de datos, sino que
+incluye controles de calidad, reglas de transformación, optimización del
+rendimiento y un Dashboard Ejecutivo orientado al análisis de resultados.
 
 ---
 
