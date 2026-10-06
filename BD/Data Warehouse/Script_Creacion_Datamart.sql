@@ -81,7 +81,7 @@ COMMENT ON TABLE dim_pagos IS 'Dimensión que agrupa las transacciones por méto
 -- DESCRIPCIÓN: Tabla central que registra métricas cuantitativas a nivel de ítem por pedido.
 -- ----------------------------------------------------------------------------
 CREATE TABLE fact_ventas (
-    id_ventas_dim 		SERIAL 			PRIMARY KEY,
+    id_ventas 		    SERIAL 			PRIMARY KEY,
     id_cliente_dim 		INT 			NOT NULL,
     id_producto_dim 	INT 			NOT NULL,
     id_tiempo_dim 		INT 			NOT NULL,
