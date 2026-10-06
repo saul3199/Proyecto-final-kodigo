@@ -71,7 +71,8 @@ COMMENT ON TABLE dim_tiempo IS 'Dimensión de tiempo detallada para evitar cálc
 CREATE TABLE dim_pagos (
     id_pago_dim 		SERIAL 			PRIMARY KEY,
     metodo_pago 		VARCHAR(50) 	NOT NULL,
-    estatus_transaccion VARCHAR(50) 	NOT NULL
+    estado_pago VARCHAR(50) 	NOT null,
+    CONSTRAINT uq_dim_pago_metodo_estado UNIQUE (metodo_pago, estado_pago)
 );
 
 COMMENT ON TABLE dim_pagos IS 'Dimensión que agrupa las transacciones por método y estado de confirmación del cobro.';
@@ -91,6 +92,7 @@ CREATE TABLE fact_ventas (
     cantidad 			INT 			NOT NULL,
     precio_unitario 	NUMERIC(12, 2) 	NOT NULL,
     monto_total_item 	NUMERIC(12, 2) 	NOT NULL,
+    CONSTRAINT uq_fact_ventas_order_item UNIQUE (order_item_id),
     -- Restricciones de integridad referencial (Foreign Keys)
     CONSTRAINT fk_fact_cliente FOREIGN KEY (id_cliente_dim) REFERENCES dim_clientes(id_cliente_dim),
     CONSTRAINT fk_fact_producto FOREIGN KEY (id_producto_dim) REFERENCES dim_productos(id_producto_dim),
@@ -99,6 +101,4 @@ CREATE TABLE fact_ventas (
 );
 
 COMMENT ON TABLE fact_ventas IS 'Tabla de hechos central. Mantiene las métricas transaccionales con granularidad por ítem de pedido.';
-
-
 
