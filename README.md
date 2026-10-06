@@ -1,4 +1,119 @@
-# Proyecto Final Kodigo
+# 🛒 Online Shop — Data Warehouse & Analytics
+
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Data%20Warehouse-336791?logo=postgresql&logoColor=white)
+![SQL](https://img.shields.io/badge/SQL-ETL-4479A1?logo=databricks&logoColor=white)
+![Metabase](https://img.shields.io/badge/Metabase-BI-509EE3?logo=metabase&logoColor=white)
+![Git](https://img.shields.io/badge/Git-Version%20Control-F05032?logo=git&logoColor=white)
+![Status](https://img.shields.io/badge/Status-En%20desarrollo-yellow)
+
+## 🎓 Proyecto Final — Kodigo
+
+Proyecto académico enfocado en el diseño e implementación de una solución de **Data Warehouse y Data Mart** para el análisis de información proveniente de una tienda online.
+
+El proyecto parte de un **modelo transaccional (OLTP)** y desarrolla un proceso de transformación mediante **ETL**, con el objetivo de construir un **modelo dimensional tipo estrella (Star Schema)** orientado al análisis y generación de indicadores de negocio.
+
+---
+
+## 📌 Descripción del proyecto
+
+El crecimiento de los datos generados por una tienda online hace necesario contar con estructuras que permitan transformar los datos operacionales en información útil para la toma de decisiones.
+
+Este proyecto busca implementar una solución que permita:
+
+- Integrar información proveniente del sistema transaccional.
+- Transformar y preparar los datos mediante procesos ETL.
+- Construir un Data Mart orientado al análisis.
+- Implementar un modelo dimensional tipo estrella.
+- Utilizar claves subrogadas para las dimensiones.
+- Definir claramente la granularidad de la tabla de hechos.
+- Generar indicadores clave de desempeño (KPIs).
+- Facilitar la exploración de la información mediante herramientas de Business Intelligence.
+
+---
+
+# 🎯 Objetivos
+
+## Objetivo general
+
+Diseñar e implementar un **Data Warehouse orientado al análisis de ventas de una tienda online**, utilizando procesos ETL y un modelo dimensional tipo estrella que permita obtener información confiable para el análisis de ventas, clientes, productos, pagos y logística.
+
+## Objetivos específicos
+
+- Analizar la estructura y características de los datos transaccionales.
+- Identificar las entidades y atributos relevantes para el análisis.
+- Diseñar un modelo dimensional basado en un esquema estrella.
+- Implementar dimensiones con claves subrogadas.
+- Definir la granularidad de la tabla de hechos.
+- Construir la tabla `fact_ventas`.
+- Implementar las dimensiones de productos, clientes, pagos y tiempo.
+- Realizar procesos de extracción, transformación y carga (ETL).
+- Validar la integridad y calidad de los datos.
+- Construir consultas para la generación de KPIs.
+- Presentar los resultados mediante una herramienta de Business Intelligence.
+
+---
+
+# 🏗️ Arquitectura de la solución
+
+La solución sigue un flujo de procesamiento de datos desde el sistema transaccional hasta la capa de análisis:
+
+```text
+┌─────────────────────────────┐
+│     SISTEMA TRANSACCIONAL   │
+│            OLTP             │
+│                             │
+│  Orders                     │
+│  Order Items                │
+│  Products                   │
+│  Customers                  │
+│  Payments                   │
+│  Reviews                    │
+│  Shipments                  │
+└──────────────┬──────────────┘
+               │
+               │ Extract
+               ▼
+┌─────────────────────────────┐
+│           STAGING           │
+│                             │
+│ Datos temporales            │
+│ Validación                  │
+│ Limpieza                    │
+│ Estandarización             │
+└──────────────┬──────────────┘
+               │
+               │ Transform / Load
+               ▼
+┌─────────────────────────────┐
+│       DATA WAREHOUSE        │
+│                             │
+│ Modelo dimensional          │
+│ Claves subrogadas           │
+│ Integridad referencial      │
+└──────────────┬──────────────┘
+               │
+               ▼
+┌─────────────────────────────┐
+│          DATA MART          │
+│                             │
+│       ⭐ Star Schema        │
+│                             │
+│      fact_ventas            │
+│      dim_productos          │
+│      dim_clientes           │
+│      dim_pagos              │
+│      dim_tiempo             │
+└──────────────┬──────────────┘
+               │
+               ▼
+┌─────────────────────────────┐
+│       BUSINESS INTELLIGENCE │
+│                             │
+│          Metabase           │
+│                             │
+│       KPIs / Dashboards     │
+└─────────────────────────────┘
+```
 
 ## Recursos del proyecto
 
