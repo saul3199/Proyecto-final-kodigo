@@ -109,7 +109,7 @@ La solución sigue un flujo de procesamiento de datos desde el sistema transacci
                ▼
 ┌──────────────────────────────┐
 │       DATA MART DE VENTAS    │
-│       ⭐ STAR SCHEMA          │
+│       ⭐ STAR SCHEMA         │
 │                              │
 │        fact_ventas           │
 │             │                │
@@ -129,7 +129,7 @@ La solución sigue un flujo de procesamiento de datos desde el sistema transacci
 │                              │
 │       Dashboard Ejecutivo    │
 │                              │
-│  • 5 KPIs                    │
+│  • 10 KPIs                   │
 │  • Filtros                   │
 │  • Gráficos                  │
 │  • Data Storytelling         │
@@ -243,7 +243,7 @@ cd Proyecto-final-kodigo
 
 ## 📝 Recursos del proyecto
 
-### 📊 Base de datos
+### 📊 Dataset utilizado
 [Dataset de Online Shop 2024 - Kaggle](https://www.kaggle.com/datasets/marthadimgba/online-shop-2024?select=orders.csv)
 
 ### 📄 Documento del proyecto
