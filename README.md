@@ -1,4 +1,4 @@
-# 🛒 Online Shop — Data Warehouse & Analytics
+# 🛒 Tienda en Linea — Data Warehouse & Analytics
 
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Data%20Warehouse-336791?logo=postgresql&logoColor=white)
 ![SQL](https://img.shields.io/badge/SQL-ETL-4479A1?logo=databricks&logoColor=white)
@@ -8,7 +8,7 @@
 
 ## 🎓 Proyecto Final — Kodigo
 
-Proyecto académico enfocado en el diseño e implementación de una solución de **Data Warehouse y Data Mart** para el análisis de información proveniente de una tienda online.
+Proyecto académico enfocado en el diseño e implementación de una solución de **ETL, Data Mart y Visualizacion de datos ** para el análisis de información proveniente de una tienda online.
 
 El proyecto parte de un **modelo transaccional (OLTP)** y desarrolla un proceso de transformación mediante **ETL**, con el objetivo de construir un **modelo dimensional tipo estrella (Star Schema)** orientado al análisis y generación de indicadores de negocio.
 
@@ -43,21 +43,33 @@ rendimiento y un Dashboard Ejecutivo orientado al análisis de resultados.
 
 ## Objetivo general
 
-Diseñar e implementar un **Data Warehouse orientado al análisis de ventas de una tienda online**, utilizando procesos ETL y un modelo dimensional tipo estrella que permita obtener información confiable para el análisis de ventas, clientes, productos, pagos y logística.
+Diseñar e implementar un **Data Mart de ventas** que permita transformar datos transaccionales en información confiable, estructurada y optimizada para el análisis empresarial, utilizando técnicas de modelado dimensional, procesos ETL, optimización SQL y herramientas de visualización.
+
 
 ## Objetivos específicos
 
-- Analizar la estructura y características de los datos transaccionales.
-- Identificar las entidades y atributos relevantes para el análisis.
-- Diseñar un modelo dimensional basado en un esquema estrella.
-- Implementar dimensiones con claves subrogadas.
-- Definir la granularidad de la tabla de hechos.
-- Construir la tabla `fact_ventas`.
-- Implementar las dimensiones de productos, clientes, pagos y tiempo.
-- Realizar procesos de extracción, transformación y carga (ETL).
-- Validar la integridad y calidad de los datos.
-- Construir consultas para la generación de KPIs.
-- Presentar los resultados mediante una herramienta de Business Intelligence.
+- Diseñar un **Modelo de Estrella** con una tabla de hechos y al menos
+  tres dimensiones.
+- Definir claramente la **granularidad** de la tabla de hechos.
+- Implementar **claves subrogadas** independientes de los identificadores
+  del sistema transaccional.
+- Garantizar la **integridad referencial** mediante claves primarias,
+  claves foráneas y restricciones de integridad.
+- Desarrollar un proceso ETL para limpiar, transformar y cargar los
+  datos hacia el Data Mart.
+- Aplicar reglas de **limpieza y estandarización** sobre los datos
+  transaccionales.
+- Utilizar **CTEs (Common Table Expressions)** para estructurar las
+  transformaciones SQL de manera modular y reutilizable.
+- Analizar y mejorar el rendimiento de consultas mediante
+  `EXPLAIN ANALYZE`.
+- Implementar índices y otras técnicas de optimización justificadas
+  mediante evidencia de rendimiento.
+- Construir un **Dashboard Ejecutivo** con cinco KPIs estratégicos.
+- Incorporar filtros dinámicos que permitan explorar la información
+  desde diferentes perspectivas.
+- Interpretar los resultados obtenidos mediante técnicas de
+  **Data Storytelling**.
 
 ---
 
@@ -66,63 +78,97 @@ Diseñar e implementar un **Data Warehouse orientado al análisis de ventas de u
 La solución sigue un flujo de procesamiento de datos desde el sistema transaccional hasta la capa de análisis:
 
 ```text
-┌─────────────────────────────┐
-│     SISTEMA TRANSACCIONAL   │
-│            OLTP             │
-│                             │
-│  Orders                     │
-│  Order Items                │
-│  Products                   │
-│  Customers                  │
-│  Payments                   │
-│  Reviews                    │
-│  Shipments                  │
-└──────────────┬──────────────┘
-               │
-               │ Extract
-               ▼
-┌─────────────────────────────┐
-│           STAGING           │
-│                             │
-│ Datos temporales            │
-│ Validación                  │
-│ Limpieza                    │
-│ Estandarización             │
-└──────────────┬──────────────┘
-               │
-               │ Transform / Load
-               ▼
-┌─────────────────────────────┐
-│       DATA WAREHOUSE        │
-│                             │
-│ Modelo dimensional          │
-│ Claves subrogadas           │
-│ Integridad referencial      │
-└──────────────┬──────────────┘
-               │
-               ▼
-┌─────────────────────────────┐
-│          DATA MART          │
-│                             │
-│       ⭐ Star Schema        │
-│                             │
-│      fact_ventas            │
-│      dim_productos          │
-│      dim_clientes           │
-│      dim_pagos              │
-│      dim_tiempo             │
-└──────────────┬──────────────┘
-               │
-               ▼
-┌─────────────────────────────┐
-│       BUSINESS INTELLIGENCE │
-│                             │
-│          Metabase           │
-│                             │
-│       KPIs / Dashboards     │
-└─────────────────────────────┘
-```
 
+┌──────────────────────────────┐
+│     FUENTE TRANSACCIONAL     │
+│                              │
+│  orders                      │
+│  order_items                 │
+│  products                    │
+│  customers                   │
+│  payments                    │
+│  shipments                   │
+│  reviews                     │
+└──────────────┬───────────────┘
+               │
+               │ Extracción
+               ▼
+┌──────────────────────────────┐
+│       PROCESO ETL / SQL      │
+│                              │
+│  • Limpieza de datos         │
+│  • Tratamiento de NULL       │
+│  • Estandarización           │
+│  • Transformaciones          │
+│  • CTEs                      │
+│  • Generación de SK          │
+│  • Validaciones              │
+└──────────────┬───────────────┘
+               │
+               │ Carga
+               ▼
+┌──────────────────────────────┐
+│       DATA MART DE VENTAS    │
+│       ⭐ STAR SCHEMA          │
+│                              │
+│        fact_ventas           │
+│             │                │
+│     ┌───────┼────────┐       │
+│     ▼       ▼        ▼       │
+│ dim_productos dim_clientes   │
+│     │       │                │
+│     └───────┼────────┐       │
+│             ▼        ▼       │
+│         dim_pagos dim_tiempo │
+└──────────────┬───────────────┘
+               │
+               │ Consulta
+               ▼
+┌──────────────────────────────┐
+│      BUSINESS INTELLIGENCE   │
+│                              │
+│       Dashboard Ejecutivo    │
+│                              │
+│  • 5 KPIs                    │
+│  • Filtros                   │
+│  • Gráficos                  │
+│  • Data Storytelling         │
+└──────────────────────────────┘
+
+```
+### 📁 Estructura de Archivos
+
+```text
+online-shop-datawarehouse/
+│
+├── README.md
+│
+├── docs/
+│   ├── modelo-transaccional.png
+│   ├── modelo-estrella.png
+│   ├── arquitectura.md
+│   ├── granularidad.md
+│   ├── claves-subrogadas.md
+│   └── kpis.md
+│
+├── sql/
+│   ├── 01_source/
+│   ├── 02_staging/
+│   ├── 03_dimensions/
+│   ├── 04_facts/
+│   ├── 05_constraints/
+│   └── 06_kpis/
+│
+├── etl/
+│   ├── extract/
+│   ├── transform/
+│   └── load/
+│
+├── tests/
+│
+└── dashboard/
+    └── screenshots/
+```
 ## Recursos del proyecto
 
 ### 📊 Base de datos
@@ -133,3 +179,5 @@ La solución sigue un flujo de procesamiento de datos desde el sistema transacci
 
 ### 📁 Archivos del proyecto
 [Esquema de relaciones](https://drive.google.com/file/d/1O42l3SSvMYu1Kf7ej7TM7rq_HPYuajGo/view)
+
+
