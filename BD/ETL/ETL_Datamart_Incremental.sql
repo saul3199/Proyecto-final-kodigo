@@ -196,15 +196,15 @@ BEGIN
 
     WITH metodos_pago_unicos AS (
         SELECT DISTINCT
-            UPPER(TRIM(COALESCE(payment_method, 'NOT SPECIFIED'))) AS metodo_pago,
-            INITCAP(TRIM(COALESCE(transaction_status, 'Unknown'))) AS estado_pago
+            UPPER(TRIM(COALESCE(payment_method, 'NO ESPECIFICADO'))) AS metodo_pago,
+            INITCAP(TRIM(COALESCE(transaction_status, 'DESCONOCIDO'))) AS estado_pago
         FROM payment
 
         UNION
 
         SELECT
-            'NOT SPECIFIED'::VARCHAR(50) AS metodo_pago,
-            'Unknown'::VARCHAR(50) AS estado_pago
+            'NO ESPECIFICADO'::VARCHAR(50) AS metodo_pago,
+            'DESCONOCIDO'::VARCHAR(50) AS estado_pago
     )
     INSERT INTO pf_dw.dim_pagos (
         metodo_pago,
@@ -233,12 +233,12 @@ BEGIN
             o.order_date::DATE AS order_date,
             UPPER(
                 TRIM(
-                    COALESCE(pay.payment_method, 'NOT SPECIFIED')
+                    COALESCE(pay.payment_method, 'NO ESPECIFICADO')
                 )
             ) AS payment_method_raw,
             INITCAP(
                 TRIM(
-                    COALESCE(pay.transaction_status, 'Unknown')
+                    COALESCE(pay.transaction_status, 'DESCONOCIDO')
                 )
             ) AS transaction_status_raw,
             oi.quantity AS cantidad,
@@ -305,36 +305,41 @@ $$;
 -- ============================================================================
 
 -- 1. Validar granularidad: un único registro por order_item_id.
--- SELECT order_item_id, COUNT(*)
--- FROM pf_dw.fact_ventas
--- GROUP BY order_item_id
--- HAVING COUNT(*) > 1;
-
--- 2. Validar ventas totales.
--- SELECT SUM(monto_total_item) AS ventas_totales
--- FROM pf_dw.fact_ventas;
-
--- 3. Validar número de órdenes.
--- SELECT COUNT(DISTINCT order_id) AS numero_ordenes
--- FROM pf_dw.fact_ventas;
-
--- 4. Validar participación de ventas por método de pago.
--- SELECT
---     dp.metodo_pago,
---     SUM(fv.monto_total_item) AS ventas,
---     ROUND(
---         100.0 * SUM(fv.monto_total_item)
---         / NULLIF(SUM(SUM(fv.monto_total_item)) OVER (), 0),
---         2
---     ) AS participacion_pct
--- FROM pf_dw.fact_ventas fv
--- JOIN pf_dw.dim_pagos dp
---     ON fv.id_pago_dim = dp.id_pago_dim
--- GROUP BY dp.metodo_pago
--- ORDER BY ventas DESC;
-
 /*
- * Conteo de registros para verificar que no haya duplicados
+SELECT order_item_id, COUNT(*)
+ FROM pf_dw.fact_ventas
+ GROUP BY order_item_id
+ HAVING COUNT(*) > 1;
+*/
+-- 2. Validar ventas totales.
+/*
+ SELECT SUM(monto_total_item) AS ventas_totales
+ FROM pf_dw.fact_ventas;
+*/
+-- 3. Validar número de órdenes.
+/*
+ SELECT COUNT(DISTINCT order_id) AS numero_ordenes
+ FROM pf_dw.fact_ventas;
+*/
+-- 4. Validar participación de ventas por método de pago.
+/*
+ SELECT
+     dp.metodo_pago,
+     SUM(fv.monto_total_item) AS ventas,
+     ROUND(
+         100.0 * SUM(fv.monto_total_item)
+         / NULLIF(SUM(SUM(fv.monto_total_item)) OVER (), 0),
+         2
+     ) AS participacion_pct
+ FROM pf_dw.fact_ventas fv
+ JOIN pf_dw.dim_pagos dp
+     ON fv.id_pago_dim = dp.id_pago_dim
+ GROUP BY dp.metodo_pago
+ ORDER BY ventas DESC;
+*/
+/*
+ -- Conteo de registros para verificar que no haya duplicados entre ejecuciones incrementales.
+ -- Se espera que los conteos sean consistentes entre ejecuciones.
  select
 	 (select count(*) from pf_dw.dim_clientes) as clientes,
 	 (select count(*) from pf_dw.dim_pagos) as pagos,
@@ -343,5 +348,5 @@ $$;
 	 (select count(*) from pf_dw.fact_ventas) as ventas
  ;
  */
--- v1: 10000	4	2000	366	20000
--- v2: 10000	4	2000	366	20000   -- ok no duplica
+-- ejecución 1: 10000	4	2000	366	20000
+-- ejecución 2: 10000	4	2000	366	20000   -- ok no duplica
