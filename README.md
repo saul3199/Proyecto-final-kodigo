@@ -139,34 +139,46 @@ La solución sigue un flujo de procesamiento de datos desde el sistema transacci
 ### 📁 Estructura de Archivos
 
 ```text
-online-shop-datawarehouse/
+proyecto_final_kodigo/
 │
 ├── README.md
 │
-├── docs/
-│   ├── modelo-transaccional.png
-│   ├── modelo-estrella.png
-│   ├── arquitectura.md
-│   ├── granularidad.md
-│   ├── claves-subrogadas.md
-│   └── kpis.md
+├── 📂 01_trasaccional/
+│   ├── diagrama_transaccional.png
+│   ├── script_creacion_tablas_transaccionales.sql
+│   ├── backup_tablas_transaccionales.backup
+│   └── 📂 dataset/
+│       ├── 📂 csv/
+│       |   ├── customers.csv
+|       │   ├── orders.csv
+|       │   ├── order_items.csv
+|       │   ├── products.csv
+|       │   ├── payments.csv
+|       │   ├── shipments.csv
+|       │   └── reviews.csv
+│       |
+|       └── 📂 sql/
+|           ├── customers.sql
+|           ├── orders.sql
+|           ├── order_items.sql
+|           ├── products.sql
+|           ├── payments.sql
+|           ├── shipments.sql
+|           └── reviews.sql
 │
-├── sql/
-│   ├── 01_source/
-│   ├── 02_staging/
-│   ├── 03_dimensions/
-│   ├── 04_facts/
-│   ├── 05_constraints/
-│   └── 06_kpis/
 │
-├── etl/
-│   ├── extract/
-│   ├── transform/
-│   └── load/
+├── 📂 02_data_mart/
+│   ├── diagrama_datamart.png
+│   └── script_creacion_datamart.sql
 │
-├── tests/
+├── 📂 03_etl/
+│   └── script_etl_datamart_incremental.sql
 │
-└── dashboard/
+├── 📂 04_optimizacion/
+│
+├── 📂 05_kpis/
+│
+└── 📂 06_docs/
     └── screenshots/
 ```
 ## Recursos del proyecto
