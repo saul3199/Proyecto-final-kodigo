@@ -177,6 +177,17 @@ proyecto_final_kodigo/
 ├── 📂 04_optimizacion/
 │
 ├── 📂 05_kpis/
+|   ├── ordenes_por_categoria.sql
+|   ├── ventas_totales.sql
+|   ├── numero_ordenes.sql
+|   ├── unidades_vendidas.sql
+|   ├── ticket_promedio.sql
+|   ├── crecimiento_ventas.sql
+|   ├── ventas_por_categoria.sql
+|   ├── top_productos.sql
+|   ├── top_clientes.sql
+|   ├── ventas_por_metodo_pago.sql
+|   └── rating_promedio.sql
 │
 └── 📂 06_docs/
     └── screenshots/
