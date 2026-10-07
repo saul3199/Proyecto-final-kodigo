@@ -133,3 +133,8 @@ La solución sigue un flujo de procesamiento de datos desde el sistema transacci
 
 ### 📁 Archivos del proyecto
 [Esquema de relaciones](https://drive.google.com/file/d/1O42l3SSvMYu1Kf7ej7TM7rq_HPYuajGo/view)
+
+### 📁 Contribuyentes
+<a href="https://github.com/saul3199/Proyecto-final-kodigo/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=saul3199/Proyecto-final-kodigo" />
+</a>
