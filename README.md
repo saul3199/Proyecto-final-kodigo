@@ -39,14 +39,14 @@ rendimiento y un Dashboard Ejecutivo orientado al análisis de resultados.
 
 ---
 
-# 🎯 Objetivos
+## 🎯 Objetivos
 
-## Objetivo general
+### Objetivo general
 
 Diseñar e implementar un **Data Mart de ventas** que permita transformar datos transaccionales en información confiable, estructurada y optimizada para el análisis empresarial, utilizando técnicas de modelado dimensional, procesos ETL, optimización SQL y herramientas de visualización.
 
 
-## Objetivos específicos
+### Objetivos específicos
 
 - Diseñar un **Modelo de Estrella** con una tabla de hechos y al menos
   tres dimensiones.
@@ -73,7 +73,7 @@ Diseñar e implementar un **Data Mart de ventas** que permita transformar datos 
 
 ---
 
-# 🏗️ Arquitectura de la solución
+## 🏗️ Arquitectura de la solución
 
 La solución sigue un flujo de procesamiento de datos desde el sistema transaccional hasta la capa de análisis:
 
@@ -136,7 +136,9 @@ La solución sigue un flujo de procesamiento de datos desde el sistema transacci
 └──────────────────────────────┘
 
 ```
-### 📁 Estructura de Archivos
+
+---
+## 📁 Estructura de Archivos
 
 ```text
 proyecto_final_kodigo/
@@ -192,7 +194,54 @@ proyecto_final_kodigo/
 └── 📂 06_docs/
     └── screenshots/
 ```
-## Recursos del proyecto
+---
+## 🚀 Guía de ejecución
+
+#### 📝 Requisitos
+
+Antes de ejecutar el proyecto se requiere:
+
+- PostgreSQL 14 o superior
+- Git
+- DBeaver, pgAdmin o psql
+- Acceso a una base de datos PostgreSQL
+
+---
+
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/saul3199/Proyecto-final-kodigo.git
+cd Proyecto-final-kodigo
+
+```
+### 2. Tablas transaccionales
+
+* Crear un esquema dedicado a la data transaccional llamado *pf_org* en postgres
+* La obtencion de la data para estas tablas puede crearse de dos formas
+  1. Por medio de un backup
+    - Restaurar el backup en el esquema creado anteriormente alojado en la ruta: 01_transacciones/backup_tablas_transaccionales.backup
+  2. Creando las tablas y populando sus datos
+    - Ejecutar el script que se encuentra en la ruta -> 01_transaccional / script_creacion_tablas_transaccionales.sql
+    - Ejecutar cada uno de los sql de populacion de la data que se encuentran dentro de la carpeta sql en la ruta -> 01_transaccional / dataset / sql
+
+### 3. Creacion de tablas datamart
+
+  * Crear un esquema dedicado al datamart llamado *pf_dw* en postgres
+  * Ejecutar el script que se encuentra en la ruta -> 02_data_mart / script_creacion_datamart.sql
+
+### 4. ETL para la transformacion de la data de transaccional al datamart
+
+  * Ejecutar el script que se encuentra en la ruta -> 03_etl / script_etl_datamart_incremental.sql
+  * Ejecutar la funcion creada y validar la data.
+
+### 5. Replica de KPI's
+
+  * Ejecutar cada una de las consultas dentro de la ruta -> 05_kpis
+
+---
+
+## 📝 Recursos del proyecto
 
 ### 📊 Base de datos
 [Dataset de Online Shop 2024 - Kaggle](https://www.kaggle.com/datasets/marthadimgba/online-shop-2024?select=orders.csv)
