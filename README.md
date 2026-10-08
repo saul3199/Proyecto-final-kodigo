@@ -68,8 +68,7 @@ Diseñar e implementar un **Data Mart de ventas** que permita transformar datos 
 - Construir un **Dashboard Ejecutivo** con cinco KPIs estratégicos.
 - Incorporar filtros dinámicos que permitan explorar la información
   desde diferentes perspectivas.
-- Interpretar los resultados obtenidos mediante técnicas de
-  **Data Storytelling**.
+- Interpretar los resultados obtenidos mediante el análisis de los KPI's
 
 ---
 
